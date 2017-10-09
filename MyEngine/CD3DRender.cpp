@@ -77,4 +77,32 @@ void CD3DRender::createBackBuffer(IDXGISwapChain *&pChain, ID3D11Texture2D *&pte
 void CD3DRender::createDepthStenciBuffer(CViewPort &viewPort) {
 	ID3D11Texture2D *depthStencil;
 	D3D11_TEXTURE2D_DESC tdesc;
+	tdesc.Width = viewPort.viewPortInfo.Width;
+	tdesc.Height = viewPort.viewPortInfo.Height;
+	tdesc.MipLevels = 1;
+	tdesc.ArraySize = 1;
+	tdesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	tdesc.SampleDesc.Count = 1;
+	tdesc.SampleDesc.Quality = 0;
+	tdesc.Usage = D3D11_USAGE_DEFAULT;
+	tdesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	tdesc.CPUAccessFlags = 0;
+	tdesc.MiscFlags = 0;
+
+	HR(pDevice->CreateTexture2D(&tdesc, 0, &depthStencil),"Failed to create the depth stencil buffer!");
+
+	D3D11_DEPTH_STENCIL_VIEW_DESC sdesc;
+
+	sdesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	sdesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	sdesc.Texture2D.MipSlice = 0;
+	sdesc.Flags = 0;
+
+	HR(pDevice->CreateDepthStencilView(depthStencil, &sdesc, &viewPort.depthStencilView), "Failed to create the depthStencilView!");
+	
+	 
+};
+
+void CD3DRender::resizeWindow(HWND hwnd, int newSizeW, int newSizeH) {
+    
 };

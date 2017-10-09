@@ -41,6 +41,9 @@ public:
 	void createViewport(HWND hwnd,int width,int height,bool full);
 	void createBackBuffer(IDXGISwapChain *&pChain,ID3D11Texture2D *&ptex,ID3D11RenderTargetView *&pRtView);
 	void createDepthStenciBuffer(CViewPort &viewPort);
+public:
+	void resizeWindow(HWND hwnd,int newSizeW,int newSizeH);
+
 };
 
 #endif
