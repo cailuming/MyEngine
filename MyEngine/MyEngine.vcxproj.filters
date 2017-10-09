@@ -18,9 +18,6 @@
     <ClInclude Include="Macro.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="D3DRender.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="CMatrix.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -30,9 +27,12 @@
     <ClInclude Include="CVec4D.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CD3DRender.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D3DRender.cpp">
+    <ClCompile Include="CD3DRender.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -20,7 +20,7 @@ public:
 	FORCEINILINE float &operator[] (unsigned int index) {
 		return (&x)[index];
 	};
-	FORCEINILINE float operator[](unsigned int index) {
+	FORCEINILINE float operator[](unsigned int index)const {
 		return (&x)[index];
 	};
 	FORCEINILINE CVec4D operator-() {

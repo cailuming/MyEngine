@@ -7,7 +7,7 @@ public:
 	__inline CPlane() {
 	   
 	};
-	__inline CPlane(const FPlane &P) {
+	__inline CPlane(const CPlane &P) {
 	
 	}
 
