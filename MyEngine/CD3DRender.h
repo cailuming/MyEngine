@@ -35,14 +35,14 @@ public:
 public:
 	ID3D11Device *pDevice;
 	ID3D11DeviceContext *pContext;
- 
+	CViewPort viewPort;
 public:
 	void createDevice();
 	void createViewport(HWND hwnd,int width,int height,bool full);
 	void createBackBuffer(IDXGISwapChain *&pChain,ID3D11Texture2D *&ptex,ID3D11RenderTargetView *&pRtView);
 	void createDepthStenciBuffer(CViewPort &viewPort);
 public:
-	void resizeWindow(HWND hwnd,int newSizeW,int newSizeH);
+	void resizeWindow(HWND hwnd, int newSizeW, int newSizeH, bool isFull);
 
 };
 

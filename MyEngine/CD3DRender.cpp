@@ -43,7 +43,7 @@ void CD3DRender::createViewport(HWND hwnd, int width, int height, bool full) {
 	IDXGIDevice1 *iDevice;
 	IDXGIAdapter1 *iAdapter;
 	IDXGIFactory1 *iFactory;
-	CViewPort viewPort;
+	
 
 	HR(pDevice->QueryInterface(__uuidof(IDXGIDevice1), (void**)&iDevice),"Failed to query the IDXGIDevice1!");
 	HR(iDevice->GetParent(__uuidof(IDXGIAdapter1), (void**)&iAdapter),"Failded to get the IDXGIAdapter!");
@@ -103,6 +103,16 @@ void CD3DRender::createDepthStenciBuffer(CViewPort &viewPort) {
 	 
 };
 
-void CD3DRender::resizeWindow(HWND hwnd, int newSizeW, int newSizeH) {
-    
+void CD3DRender::resizeWindow(HWND hwnd, int newSizeW, int newSizeH,bool isFull) {
+	if (newSizeW!=viewPort.viewPortInfo.Width||newSizeH != viewPort.viewPortInfo.Height) {
+		pContext->OMSetRenderTargets(0,0,0);
+		SAFERELEASE(viewPort.backBufferTexture);
+		SAFERELEASE(viewPort.renderTargetView);
+		SAFERELEASE(viewPort.depthStencilView);
+	    
+		viewPort.viewPortInfo.Width = newSizeW;
+		viewPort.viewPortInfo.Height = newSizeH;
+		viewPort.isFullScreen = isFull;
+		//viewPort
+	}
 };
