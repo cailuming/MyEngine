@@ -2,22 +2,26 @@
 
 CD3DRender *CD3DRender::instance = 0;
 
+//构造函数
 CD3DRender::CD3DRender() {
 
 }
-
+//析构函数
 CD3DRender::~CD3DRender() {
 
 }
 
+//通过create 创建Render实例
 CD3DRender *CD3DRender::create() {
 
 }
 
+//销毁Render的实例
 void CD3DRender::destroy() {
 
 }
 
+//创建D3D11设备
 void CD3DRender::createDevice() {
    D3D_FEATURE_LEVEL featureLevel;
    
@@ -25,6 +29,7 @@ void CD3DRender::createDevice() {
 
 }
 
+//创建视口模块
 void CD3DRender::createViewport(HWND hwnd, int width, int height, bool full) {
 	DXGI_SWAP_CHAIN_DESC desc;
 	memset(&desc, 0, sizeof(desc));
@@ -65,6 +70,7 @@ void CD3DRender::createViewport(HWND hwnd, int width, int height, bool full) {
 	createBackBuffer(viewPort.d3dSwapChain, viewPort.backBufferTexture, viewPort.renderTargetView);
 }
 
+//创建后背缓冲
 void CD3DRender::createBackBuffer(IDXGISwapChain *&pChain, ID3D11Texture2D *&ptex, ID3D11RenderTargetView *&pRtView) {
 	HR(pChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&ptex),"Failed to get the swapchain back buffer!");
 	D3D11_RENDER_TARGET_VIEW_DESC rtView;
@@ -74,6 +80,7 @@ void CD3DRender::createBackBuffer(IDXGISwapChain *&pChain, ID3D11Texture2D *&pte
 	HR(pDevice->CreateRenderTargetView(ptex, &rtView, &pRtView),"Failed to create the renderTargetView!");
 };
 
+//创建深度模板缓冲
 void CD3DRender::createDepthStenciBuffer(CViewPort &viewPort) {
 	ID3D11Texture2D *depthStencil;
 	D3D11_TEXTURE2D_DESC tdesc;
@@ -103,6 +110,7 @@ void CD3DRender::createDepthStenciBuffer(CViewPort &viewPort) {
 	 
 };
 
+//重新设置窗口尺寸
 void CD3DRender::resizeWindow(HWND hwnd, int newSizeW, int newSizeH,bool isFull) {
 	if (newSizeW!=viewPort.viewPortInfo.Width||newSizeH != viewPort.viewPortInfo.Height) {
 		pContext->OMSetRenderTargets(0,0,0);
@@ -114,5 +122,8 @@ void CD3DRender::resizeWindow(HWND hwnd, int newSizeW, int newSizeH,bool isFull)
 		viewPort.viewPortInfo.Height = newSizeH;
 		viewPort.isFullScreen = isFull;
 		//viewPort
+		DXGI_SWAP_CHAIN_DESC desc;
+		viewPort.d3dSwapChain->GetDesc(&desc);
+		viewPort.d3dSwapChain->ResizeBuffers();
 	}
 };
