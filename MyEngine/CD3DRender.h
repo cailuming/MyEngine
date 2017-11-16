@@ -4,6 +4,7 @@
 #include"CMatrix.h"
 struct CViewPort {
 	bool isFullScreen;
+	float bgcolor[4];
 	CMatrix projectionMatrix;
 	D3D11_VIEWPORT viewPortInfo;
 	IDXGISwapChain *d3dSwapChain;
@@ -12,7 +13,10 @@ struct CViewPort {
 	ID3D11RenderTargetView *renderTargetView;
 	ID3D11DepthStencilView *depthStencilView;
 	CViewPort() :isFullScreen(false) {
-	
+		bgcolor[0] = 0;
+		bgcolor[1] = 1;
+		bgcolor[2] = 1;
+		bgcolor[3] = 1;
 	};
 
 	~CViewPort() {
@@ -43,7 +47,8 @@ public:
 	void createDepthStenciBuffer(CViewPort &viewPort);
 public:
 	void resizeWindow(HWND hwnd, int newSizeW, int newSizeH, bool isFull);
-
+public:
+    void renderCanvas();
 };
 
 #endif

@@ -1,61 +1,34 @@
 #ifndef CWindow_H
 #define CWindow_H
 #include <Windows.h>
+#include "CD3DRender.h"
 
 class CWindow
 {
-  public:
-    static const char *AppWindowClass[];
+public:
+  static const char *AppWindowClass;
+  static CWindow *cWindow;
+  static MSG msg;
+  static bool isRunning;
+  unsigned long preTimeShut;
+  unsigned long curTimeShut;
 
-  public:
-    CWindow();
-    ~CWindow();
+public:
+  CWindow();
+  ~CWindow();
 
-  public:
-    static CWindow *create();
-    HWND getHwnd() const;
+public:
+  static CWindow *create(HINSTANCE h, int posX, int posY, int width, int height, bool full);
+  void initWindow(HINSTANCE h, int posX, int posY, int width, int height, bool full);
+ 
+  void startPumpMessage();
 
-    void setWindowSize(int width, int height);
+public:
+  static LRESULT CALLBACK WinProc(HWND hwnd, UINT msgID, WPARAM wp, LPARAM lp);
 
-    float getDPIScaleFactor() const;
-
-    void setDPIScaleFactor();
-
-    void onWindowMinimized();
-
-    void onWindowRestored();
-
-    float getAspectRatio() const;
-
-  public:
-    void reshapeWindow(int X, int Y, int width, int height);
-    bool getFullScreenInfo(int &X, int &Y, int &width, int &height);
-
-    bool isMaximized();
-    bool isMinimized();
-    bool isVisible();
-    bool setWindowFocus();
-    void setOpacity();
-    void forceToFront();
-    void destroyWindow();
-    void minimizeWindow();
-    void maxmizeWindow();
-    void restoreWindow();
-    void showWindow();
-    void hideWindow();
-    void setWindowMode();
-    
-    int getWindowBorderSize();
-    int getWindowTitleBarSize();
-
-  private:
-    HWND hwnd;
-    int regionWidth;
-    int regionHeight;
-    float aspectRatio;
-    float DPIScaleFactor;
-    bool isInitiallyMinimized;
-    bool isInitiallyMaxmized;
+private:
+  HWND hwnd;
+  CD3DRender *render;
 };
 
 #endif
