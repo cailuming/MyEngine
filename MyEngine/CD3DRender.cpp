@@ -151,12 +151,4 @@ void CD3DRender::resizeWindow(HWND hwnd, int newSizeW, int newSizeH, bool isFull
 		//viewPort.d3dSwapChain->ResizeBuffers();
 	}
 };
-
-void CD3DRender::renderCanvas(){
-    pGContext->ClearDepthStencilView(viewPort.depthStencilView,D3D11_CLEAR_DEPTH|D3D11_CLEAR_STENCIL,1,0);
-	pGContext->ClearRenderTargetView(viewPort.renderTargetView, viewPort.bgcolor);
-
-
-	viewPort.d3dSwapChain->Present(0, 0);
-
-}
+ 

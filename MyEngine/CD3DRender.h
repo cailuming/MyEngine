@@ -2,7 +2,7 @@
 #define CD3DRender_H
 #include"Macro.h"
 #include"CMatrix.h"
-
+#include"CTimer.h"
 struct CViewPort {
 	bool isFullScreen;
 	float bgcolor[4];
@@ -46,8 +46,7 @@ public:
 	void createDepthStenciBuffer(CViewPort &viewPort);
 public:
 	void resizeWindow(HWND hwnd, int newSizeW, int newSizeH, bool isFull);
-public:
-    void renderCanvas();
+ 
 };
 
 #endif

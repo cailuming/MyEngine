@@ -9,10 +9,10 @@ class CConstantBuffer
     ~CConstantBuffer();
 
   public:
-    void createBuffer(void *bufferData);
+    void createBuffer(void *data,UINT32 size);
     void *lock();
     void unLock();
-    void updateBuffer();
+    void updateBuffer(void *data, UINT32 size);
   private:
     ID3D11Buffer *buffer;
    

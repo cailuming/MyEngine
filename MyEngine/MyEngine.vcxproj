@@ -114,18 +114,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CConstantBuffer.h" />
     <ClInclude Include="CIndexBuffer.h" />
     <ClInclude Include="CMatrix.h" />
     <ClInclude Include="CPlane.h" />
+    <ClInclude Include="CShaders.h" />
+    <ClInclude Include="CTimer.h" />
     <ClInclude Include="CVec4D.h" />
+    <ClInclude Include="CVertexBuffer.h" />
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="CD3DRender.h" />
     <ClInclude Include="Main.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CConstantBuffer.cpp" />
     <ClCompile Include="CD3DRender.cpp" />
     <ClCompile Include="CIndexBuffer.cpp" />
+    <ClCompile Include="CShaders.cpp" />
+    <ClCompile Include="CTimer.cpp" />
+    <ClCompile Include="CVertexBuffer.cpp" />
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>

@@ -39,6 +39,18 @@
     <ClInclude Include="CIndexBuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CTimer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CVertexBuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CConstantBuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CShaders.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CD3DRender.cpp">
@@ -51,6 +63,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CIndexBuffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CVertexBuffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CConstantBuffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CShaders.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

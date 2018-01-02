@@ -2,5 +2,5 @@
 #define Main_H
 #include "Macro.h"
 #include "CWindow.h"
-
+#include "CD3DRender.h"
 #endif

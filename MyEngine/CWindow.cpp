@@ -74,12 +74,10 @@ void CWindow::initWindow(HINSTANCE h, int posX, int posY, int width, int height,
         MessageBoxA(0, "Failed to create the window!", 0, 0);
         return;
     }
-    render = CD3DRender::create();
-    render->createDevice();
-    render->createViewport(hwnd, width, height,full);
+   
 };
 
-void CWindow::startPumpMessage()
+void CWindow::startPumpMessage(void(*renderFunc)(int delta))
 {
     ::ShowWindow(hwnd, SW_NORMAL);
     while (isRunning)
@@ -91,12 +89,9 @@ void CWindow::startPumpMessage()
         }
         else
         {
-			curTimeShut = ::GetTickCount64();
-			if (curTimeShut - preTimeShut>=30) {
-				render->renderCanvas();
-				preTimeShut = curTimeShut;
-			}
-			 
+			if (timer->canGo(30)) {
+				renderFunc(timer->getTickDelta());
+			}	 
         }
     }
 };
@@ -113,4 +108,8 @@ LRESULT CALLBACK CWindow::WinProc(HWND hwnd, UINT msgID, WPARAM wp, LPARAM lp)
         break;
     }
     return DefWindowProc(hwnd, msgID, wp, lp);
+};
+
+HWND CWindow::getWindowHwnd() {
+	return hwnd;
 };
