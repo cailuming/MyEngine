@@ -1,37 +1,50 @@
 #include "CIndexBuffer.h"
 
-
-
 CIndexBuffer::CIndexBuffer()
 {
 }
-
 
 CIndexBuffer::~CIndexBuffer()
 {
 }
 
-void CIndexBuffer::createBuffer() {
+void CIndexBuffer::createBuffer(int sizeBytes)
+{
+    D3D11_BUFFER_DESC BufferDesc;
+    BufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+    BufferDesc.ByteWidth = sizeBytes;
+    BufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    BufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    BufferDesc.MiscFlags = 0;
 
+    HR(pGDevice->CreateBuffer(&BufferDesc, 0, &buffer), "Failed to create index buffer!");
 };
 
-void CIndexBuffer::destroyBuffer() {
-
+void CIndexBuffer::destroyBuffer()
+{
+    SAFERELEASE(buffer);
 };
 
-void CIndexBuffer::getMaxnumIndices() {
+void *CIndexBuffer::lock(int lockIndex)
+{
+    D3D11_MAPPED_SUBRESOURCE resource;
+	pGContext->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
+    void *Data = resource.pData;
 
-
+    int Offset = lockIndex * sizeof(int);
+    return (void *)((unsigned char *)Data + Offset);
 };
 
-void *CIndexBuffer::lock() {
-
+void CIndexBuffer::unLock()
+{
+	pGContext->Unmap(buffer, 0);
 };
 
-void CIndexBuffer::unLock() {
-
+ID3D11Buffer *CIndexBuffer::getResource()
+{
+    return buffer;
 };
- 
-ID3D11Buffer *CIndexBuffer::getResource() {
 
-};
+int CIndexBuffer::getMaxnumIndices() {
+	return maxIndicesNum;
+}

@@ -8,10 +8,10 @@ public:
 	CIndexBuffer();
 	~CIndexBuffer();
 public:
-	void createBuffer();
+	void createBuffer(int sizeBytes);
 	void destroyBuffer();
-	void getMaxnumIndices();
-	void *lock();
+	int getMaxnumIndices();
+	void *lock(int lockIndex);
 	void unLock();
 public:
 	ID3D11Buffer *getResource();

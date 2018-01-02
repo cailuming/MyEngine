@@ -2,6 +2,7 @@
 #define CD3DRender_H
 #include"Macro.h"
 #include"CMatrix.h"
+
 struct CViewPort {
 	bool isFullScreen;
 	float bgcolor[4];
@@ -25,7 +26,6 @@ struct CViewPort {
 		SAFERELEASE(renderTargetView);
 		SAFERELEASE(depthStencilView);
 	}
-
 };
 
 class CD3DRender {
@@ -37,9 +37,8 @@ public:
 	static CD3DRender *create();
 	static void destroy();
 public:
-	ID3D11Device *pDevice;
-	ID3D11DeviceContext *pContext;
 	CViewPort viewPort;
+
 public:
 	void createDevice();
 	void createViewport(HWND hwnd,int width,int height,bool full);
