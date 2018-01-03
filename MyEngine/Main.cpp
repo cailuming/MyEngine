@@ -3,13 +3,15 @@
 CWindow *window = 0;
 CTimer *timer = 0;
 CD3DRender *render = 0;
-
+CShaders *shader = new CShaders();
 void onInit(HWND hwnd, int width, int height, bool full) {
 	render = CD3DRender::create();
 	render->createDevice();
 	render->createViewport(hwnd, width, height, full);
 
 	timer = CTimer::create();
+
+	shader->createPixelShaderFromFile("void main(){}", "main");
 }
 
 void renderFunc(int delta) {
@@ -20,7 +22,17 @@ void renderFunc(int delta) {
 	render->viewPort.bgcolor[2] = cos(CTimer::create()->curTimeShut*0.0001)*0.7 + 0.3;
 
 	pGContext->ClearRenderTargetView(render->viewPort.renderTargetView, render->viewPort.bgcolor);
-	 
+	
+	//pGContext->IASetIndexBuffer(buffer, DXGI_FORMAT_R16_UINT, 0);
+	//pGContext->IASetInputLayout(input);
+	//pGContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	//pGContext->IASetVertexBuffers(0, 1, &buffer, vertexdata, 0);
+	//pGContext->DrawIndexed(3, 0, 0);
+	//pGContext->DrawIndexedInstanced(3, 0, 0,0,0);
+	//pGContext->Draw(3,0);
+	//pGContext->DrawInstanced(3, 0,0,0);
+
+
 	render->viewPort.d3dSwapChain->Present(0, 0);
 }
 

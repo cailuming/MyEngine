@@ -15,7 +15,7 @@ void CVertexBuffer::createBuffer(UINT32 size, D3D11_USAGE usage, void *data) {
 	D3D11_SUBRESOURCE_DATA resource;
 	memset(&BufferDesc, 0, sizeof(BufferDesc));
 	memset(&resource, 0, sizeof(resource));
-	BufferDesc.Usage = usage;// ;
+	BufferDesc.Usage = usage;
 	BufferDesc.ByteWidth = size;
 	BufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	BufferDesc.CPUAccessFlags = usage&D3D11_USAGE_DYNAMIC?D3D11_CPU_ACCESS_WRITE:0;

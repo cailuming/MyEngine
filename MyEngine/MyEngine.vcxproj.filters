@@ -45,10 +45,10 @@
     <ClInclude Include="CVertexBuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="CConstantBuffer.h">
+    <ClInclude Include="CShaders.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="CShaders.h">
+    <ClInclude Include="CConstBuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,10 +71,10 @@
     <ClCompile Include="CVertexBuffer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="CConstantBuffer.cpp">
+    <ClCompile Include="CShaders.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="CShaders.cpp">
+    <ClCompile Include="CConstBuffer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

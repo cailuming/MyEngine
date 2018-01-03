@@ -114,7 +114,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CConstantBuffer.h" />
+    <ClInclude Include="CConstBuffer.h" />
     <ClInclude Include="CIndexBuffer.h" />
     <ClInclude Include="CMatrix.h" />
     <ClInclude Include="CPlane.h" />
@@ -128,7 +128,7 @@
     <ClInclude Include="Main.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CConstantBuffer.cpp" />
+    <ClCompile Include="CConstBuffer.cpp" />
     <ClCompile Include="CD3DRender.cpp" />
     <ClCompile Include="CIndexBuffer.cpp" />
     <ClCompile Include="CShaders.cpp" />

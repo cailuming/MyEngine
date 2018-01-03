@@ -2,8 +2,11 @@
 #define Macro_H
 
 #include <d3d11.h>
+#include <D3Dcompiler.h>
 #include <xnamath.h>
 #pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "d3dcompiler.lib")
+#pragma comment(lib, "dxguid.lib")
 
 #define HR(hr, msg)                   \
     {                                 \
