@@ -38,7 +38,8 @@ public:
 	static void destroy();
 public:
 	CViewPort viewPort;
-
+	int screenWidth;
+	int screenHeight;
 public:
 	void createDevice();
 	void createViewport(HWND hwnd,int width,int height,bool full);
@@ -46,7 +47,7 @@ public:
 	void createDepthStenciBuffer(CViewPort &viewPort);
 public:
 	void resizeWindow(HWND hwnd, int newSizeW, int newSizeH, bool isFull);
- 
+	void setWindowSize(int screenWidth,int screenHeight);
 };
 
 #endif

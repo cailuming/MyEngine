@@ -19,7 +19,10 @@ void CConstBuffer::createBuffer(void *data, UINT32 size)
     Desc.MiscFlags = 0;
     Desc.StructureByteStride = 0;
 
-    HRESULT Hr = pGDevice->CreateBuffer(&Desc, NULL, &buffer);
+	D3D11_SUBRESOURCE_DATA resource;
+	memset(&resource, 0, sizeof(resource));
+	resource.pSysMem = data;
+    HRESULT Hr = pGDevice->CreateBuffer(&Desc, &resource, &buffer);
 }
 
 void *CConstBuffer::lock()

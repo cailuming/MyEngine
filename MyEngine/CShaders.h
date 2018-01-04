@@ -6,10 +6,11 @@ class CShaders
 public:
 	CShaders();
 	~CShaders();
-private:
+public:
 	ID3D10Blob *pPShaderData;
 	ID3D10Blob *pVShaderData;
 	ID3D10Blob *pError;
+public:
 	ID3D11VertexShader *pVertexShader;
 	ID3D11PixelShader *pPixelShader;
 	ID3D11ShaderReflection *pPReflect;

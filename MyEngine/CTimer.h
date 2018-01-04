@@ -17,6 +17,7 @@ public:
 	unsigned long curTimeShut;
 	unsigned long preTimeShut;
 	unsigned long timeDelta;
+	unsigned long startTime;
 public:
 	bool canGo(int delta);
 };

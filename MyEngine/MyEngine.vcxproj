@@ -114,12 +114,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CCamera.h" />
     <ClInclude Include="CConstBuffer.h" />
+    <ClInclude Include="CFileReader.h" />
     <ClInclude Include="CIndexBuffer.h" />
     <ClInclude Include="CMatrix.h" />
     <ClInclude Include="CPlane.h" />
+    <ClInclude Include="CQuad.h" />
     <ClInclude Include="CShaders.h" />
     <ClInclude Include="CTimer.h" />
+    <ClInclude Include="CVec3D.h" />
     <ClInclude Include="CVec4D.h" />
     <ClInclude Include="CVertexBuffer.h" />
     <ClInclude Include="CWindow.h" />
@@ -128,9 +132,12 @@
     <ClInclude Include="Main.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CConstBuffer.cpp" />
     <ClCompile Include="CD3DRender.cpp" />
+    <ClCompile Include="CFileReader.cpp" />
     <ClCompile Include="CIndexBuffer.cpp" />
+    <ClCompile Include="CQuad.cpp" />
     <ClCompile Include="CShaders.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="CVertexBuffer.cpp" />

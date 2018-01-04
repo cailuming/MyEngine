@@ -12,9 +12,7 @@ public:
 	void *lock(int lockIndex);
 	void unLock();
 public:
-	ID3D11Buffer *getResource();
-private:
-	unsigned int maxIndicesNum;
+ 
 	ID3D11Buffer *buffer;
 };
 

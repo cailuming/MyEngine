@@ -8,7 +8,7 @@ public:
 	CIndexBuffer();
 	~CIndexBuffer();
 public:
-	void createBuffer(int sizeBytes);
+	void createBuffer(UINT32 size, D3D11_USAGE usage, void *data);
 	void destroyBuffer();
 	int getMaxnumIndices();
 	void *lock(int lockIndex);

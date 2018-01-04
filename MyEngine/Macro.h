@@ -1,9 +1,12 @@
 #ifndef Macro_H
 #define Macro_H
-
+#include<d3dx9.h>
 #include <d3d11.h>
 #include <D3Dcompiler.h>
 #include <xnamath.h>
+#include <iostream>
+
+#pragma comment(lib, "d3dx9.lib")
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 #pragma comment(lib, "dxguid.lib")

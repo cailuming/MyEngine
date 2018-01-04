@@ -13,7 +13,7 @@ class CConstBuffer
     void *lock();
     void unLock();
     void updateBuffer(void *data, UINT32 size);
-  private:
+public:
     ID3D11Buffer *buffer;
    
 };

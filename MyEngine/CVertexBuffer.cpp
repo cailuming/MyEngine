@@ -41,8 +41,5 @@ void *CVertexBuffer::lock(int lockIndex) {
 void CVertexBuffer::unLock() {
 	pGContext->Unmap(buffer, 0);
 }
-
-ID3D11Buffer *CVertexBuffer::getResource() {
-	return buffer;
-}
+ 
  

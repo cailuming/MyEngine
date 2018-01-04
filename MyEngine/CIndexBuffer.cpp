@@ -8,16 +8,18 @@ CIndexBuffer::~CIndexBuffer()
 {
 }
 
-void CIndexBuffer::createBuffer(int sizeBytes)
+void CIndexBuffer::createBuffer(UINT32 size, D3D11_USAGE usage, void *data)
 {
     D3D11_BUFFER_DESC BufferDesc;
-    BufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-    BufferDesc.ByteWidth = sizeBytes;
+    BufferDesc.Usage = usage;
+    BufferDesc.ByteWidth = size;
     BufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-    BufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    BufferDesc.CPUAccessFlags = 0;
     BufferDesc.MiscFlags = 0;
-
-    HR(pGDevice->CreateBuffer(&BufferDesc, 0, &buffer), "Failed to create index buffer!");
+	D3D11_SUBRESOURCE_DATA sdata;
+	memset(&sdata, 0, sizeof(sdata));
+	sdata.pSysMem = data;
+    HR(pGDevice->CreateBuffer(&BufferDesc, &sdata, &buffer), "Failed to create index buffer!");
 };
 
 void CIndexBuffer::destroyBuffer()

@@ -90,6 +90,8 @@ void CD3DRender::createViewport(HWND hwnd, int width, int height, bool full)
 
 	pGContext->OMSetRenderTargets(1, &viewPort.renderTargetView, viewPort.depthStencilView);
 	pGContext->RSSetViewports(1, &viewPort.viewPortInfo);
+
+	setWindowSize(width, height);
 }
 
 //创建后背缓冲
@@ -151,4 +153,9 @@ void CD3DRender::resizeWindow(HWND hwnd, int newSizeW, int newSizeH, bool isFull
 		//viewPort.d3dSwapChain->ResizeBuffers();
 	}
 };
+
+void CD3DRender::setWindowSize(int screenWidth, int screenHeight) {
+	this->screenHeight = screenHeight;
+	this->screenWidth = screenWidth;
+}
  

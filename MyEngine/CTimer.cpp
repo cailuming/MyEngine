@@ -3,6 +3,7 @@
 CTimer::CTimer()
 {
 	memset(this, 0, sizeof(*this));
+	startTime = ::GetTickCount64();
 }
 
 CTimer::~CTimer()
@@ -15,6 +16,7 @@ CTimer *CTimer::create() {
 	if (nullptr==timer) {
 		timer = new CTimer();
 	}
+	
 	return timer;
 };
 
@@ -24,7 +26,7 @@ void CTimer::destroy() {
 
 unsigned long CTimer::getTickCount() {
 	curTimeShut = ::GetTickCount64();
-	return curTimeShut;
+	return curTimeShut-startTime;
 };
 
 unsigned long CTimer::getTickDelta() {
