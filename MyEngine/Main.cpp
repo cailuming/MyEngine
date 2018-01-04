@@ -9,7 +9,7 @@ CVertexBuffer vBuffer;
 CIndexBuffer iBuffer;
 CConstBuffer cBuffer;
 CCamera *camera=CCamera::create();
-ID3D11InputLayout *pLayer=0;
+
 
 struct vertex {
 	float px, py, pz;
@@ -26,6 +26,14 @@ struct gBuffer {
 	float height;
 } gbuffer;
 
+
+void onResetShader() {
+
+	shader->createVertexShaderFromFile(reader->readFile("shaders/vs.hlsl"), "main");
+	shader->createPixelShaderFromFile(reader->readFile("shaders/ps.hlsl"), "main");
+}
+
+
 void onInit(HWND hwnd, int width, int height, bool full) {
 	render = CD3DRender::create();
 	render->createDevice();
@@ -35,23 +43,13 @@ void onInit(HWND hwnd, int width, int height, bool full) {
 
 	camera->initCamera(width, height);
 
-	shader->createVertexShaderFromFile(reader->readFile("shaders/vs.hlsl"), "main");
-	shader->createPixelShaderFromFile(reader->readFile("shaders/ps.hlsl"), "main");
 	float size = 1;
 	vertex v[] = { { -size, -size, 0, 0, 0, 1, 0, 0}, { -size,size, 0, 0, 0, 1, 0, 1 }, { size, size, 0, 0, 0, 1, 1, 1 }, { size, -size, 0, 0, 1, 1, 1, 0 } };
 	WORD indexs[] = {0,1,2,0,2,3};
 	vBuffer.createBuffer(sizeof(v), D3D11_USAGE_DEFAULT, v);
 	iBuffer.createBuffer(6*sizeof(WORD), D3D11_USAGE_DEFAULT, indexs);
 	cBuffer.createBuffer(&gbuffer, sizeof(gbuffer));
-	D3D11_INPUT_ELEMENT_DESC desc[] = {
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,    0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-	};
- 
-	HRESULT hr = pGDevice->CreateInputLayout(desc, ARRAYSIZE(desc), shader->pVShaderData->GetBufferPointer(), shader->pVShaderData->GetBufferSize(), &pLayer);
-	HR(hr,"Failed to create Layerout!");
-
+	onResetShader();
 }
 
 void renderFunc(int delta) {
@@ -67,7 +65,7 @@ void renderFunc(int delta) {
 	 cBuffer.updateBuffer(&gbuffer, sizeof(gbuffer));
 	 UINT stride = sizeof(vertex);
 	 UINT offset = 0;
-	 pGContext->IASetInputLayout(pLayer);
+	 pGContext->IASetInputLayout(shader->pLayer);
 	 pGContext->IASetVertexBuffers(0,1,&vBuffer.buffer,&stride, &offset);
 	 pGContext->IASetIndexBuffer(iBuffer.getResource(), DXGI_FORMAT_R16_UINT, 0);
 
@@ -87,11 +85,31 @@ void renderFunc(int delta) {
 	 camera->updateCam();
 }
 
+void callBack(UINT msgID, WPARAM wp, LPARAM lp)
+{
+	int menuID = 0;
+	switch (msgID)
+	{
+
+	case WM_COMMAND:
+		 
+		menuID = LOWORD(wp);
+		if (menuID==1001) {
+			onResetShader();
+		}
+		break;
+	}
+
+};
+
 int _stdcall WinMain(HINSTANCE h, HINSTANCE pre, char *args, int style)
 {
-	window = CWindow::create(h, 0, 0, 800, 600, false);
-    
-	onInit(window->getWindowHwnd(),800,600,false);
+	int sw = 1280;
+	int sh = 720;
+	window = CWindow::create(h, 0, 0, sw, sh, false);
+	window->setMessageCallBack(callBack);
+	onInit(window->getWindowHwnd(), sw, sh,false);
+	
 	window->startPumpMessage(renderFunc);
 }
-
+ 

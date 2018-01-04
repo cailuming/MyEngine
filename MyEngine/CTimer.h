@@ -18,6 +18,10 @@ public:
 	unsigned long preTimeShut;
 	unsigned long timeDelta;
 	unsigned long startTime;
+	bool isPause;
+public:
+	void pause();
+	void resume();
 public:
 	bool canGo(int delta);
 };

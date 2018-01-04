@@ -130,6 +130,7 @@
     <ClInclude Include="Macro.h" />
     <ClInclude Include="CD3DRender.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCamera.cpp" />
@@ -143,6 +144,9 @@
     <ClCompile Include="CVertexBuffer.cpp" />
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MainMenu.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -35,44 +35,34 @@ void CShaders::createPixelShaderFromFile(const char *shaderCode,const char *entr
 };
 
 void CShaders::createVertexShaderFromFile(const char *shaderCode, const char *entry) {
+	 
 	D3DCompile(shaderCode, strlen(shaderCode), "vertex_shader", 0, 0, entry, "vs_5_0", 0, 0, &pVShaderData, &pError);
 	if (pError) {
 		::OutputDebugString((char*)pError->GetBufferPointer());
 	}
 	HR(pGDevice->CreateVertexShader(pVShaderData->GetBufferPointer(), pVShaderData->GetBufferSize(), 0, &pVertexShader), "Failed to create vertex shader!");
 	HR(D3DReflect(pVShaderData->GetBufferPointer(), pVShaderData->GetBufferSize(), IID_ID3D11ShaderReflection, (void**)&pVReflect), "Failed to create the reflection!");
-};
-
-void CShaders::getShaderParamLocation() {
 	
-};
-void CShaders::setShaderParam1f() {
+	D3D11_INPUT_ELEMENT_DESC desc[] = {
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,    0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+	};
+
+	HRESULT hr = pGDevice->CreateInputLayout(desc, ARRAYSIZE(desc),pVShaderData->GetBufferPointer(),pVShaderData->GetBufferSize(), &pLayer);
+	HR(hr, "Failed to create Layerout!");
+
 
 };
-void CShaders::setShaderParam2f() {
 
-};
-void CShaders::setShaderParam3f() {
-
-};
-void CShaders::setShaderParam4f() {
-
-};
-void CShaders::setShaderParam1i() {
-
-};
-void CShaders::setShaderParam2i() {
-
-};
-void CShaders::setShaderParam3i() {
-
-};
-void CShaders::setShaderParam4i() {
-
-};
-void CShaders::setShaderParamMat() {
-
-};
-void CShaders::setShaderParamMatArray() {
-
+void CShaders::clearAllShader() {
+ 
+	SAFERELEASE(pPShaderData);
+	SAFERELEASE(pVShaderData);
+	SAFERELEASE(pError);
+	SAFERELEASE(pVertexShader);
+	SAFERELEASE(pPixelShader);
+	SAFERELEASE(pPReflect);
+	SAFERELEASE(pVReflect);
+	SAFERELEASE(pLayer);
 };

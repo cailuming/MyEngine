@@ -13,7 +13,7 @@ const char *CWindow::AppWindowClass = "CWindow";
 
 CWindow *CWindow::cWindow = nullptr;
 bool CWindow::isRunning = true;
-
+void (*CWindow::callBack)(UINT msgID, WPARAM wp, LPARAM lp)=0;
 MSG CWindow::msg;
 
 CWindow *CWindow::create(HINSTANCE h, int posX, int posY, int width, int height, bool full)
@@ -41,7 +41,7 @@ void CWindow::initWindow(HINSTANCE h, int posX, int posY, int width, int height,
     wnd.hInstance = h;
     wnd.lpfnWndProc = WinProc;
     wnd.lpszClassName = AppWindowClass;
-    wnd.lpszMenuName = 0;
+    wnd.lpszMenuName = MAKEINTRESOURCE(IDR_MENU1);
     wnd.style = CS_HREDRAW | CS_VREDRAW;
 
     if (!RegisterClassEx(&wnd))
@@ -96,19 +96,30 @@ void CWindow::startPumpMessage(void(*renderFunc)(int delta))
     }
 };
  
+
 LRESULT CALLBACK CWindow::WinProc(HWND hwnd, UINT msgID, WPARAM wp, LPARAM lp)
 {
-    switch (msgID)
-    {
-    case WM_CREATE:
-        isRunning = true;
-        break;
-    case WM_CLOSE:
+	switch (msgID)
+	{
+	case WM_CREATE:
+		isRunning = true;
+		break;
+	case WM_CLOSE:
 		isRunning = false;
-        break;
-    }
-    return DefWindowProc(hwnd, msgID, wp, lp);
+		break;
+	
+	}
+	if (callBack) {
+		callBack(msgID, wp, lp);
+	}
+	return DefWindowProc(hwnd, msgID, wp, lp);
 };
+
+void CWindow::setMessageCallBack(void(*callBack)(UINT msgID, WPARAM wp, LPARAM lp)) {
+	this->callBack = callBack;
+}
+
+
 
 HWND CWindow::getWindowHwnd() {
 	return hwnd;

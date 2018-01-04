@@ -2,6 +2,7 @@
 #define CWindow_H
 #include <Windows.h>
 #include "CTimer.h"
+#include "resource.h"
 extern CTimer *timer;
 class CWindow
 {
@@ -24,10 +25,10 @@ public:
   HWND getWindowHwnd();
 public:
   static LRESULT CALLBACK WinProc(HWND hwnd, UINT msgID, WPARAM wp, LPARAM lp);
-
+  void setMessageCallBack(void(*callBack)(UINT msgID, WPARAM wp, LPARAM lp));
 private:
   HWND hwnd;
- 
+  static void(*callBack)(UINT msgID, WPARAM wp, LPARAM lp);
 };
 
 #endif

@@ -1,11 +1,4 @@
-//// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
-//----------------------------------------------------------------------
-
+ 
 cbuffer gBuffer : register(b0)
 {
 	matrix mat;
@@ -36,7 +29,7 @@ float2 obj(float3 p,float c) {
 
 float2 plane(float3 p, float c) {
 	p -= c;
-	return float2(p.y+1, 1);
+	return float2(p.y+1+0.2*sin(0.5*p.z*p.x), 1);
 }
 
 void cmp(float2 a,inout float2 r) {
@@ -92,9 +85,8 @@ void textureMap(inout float3 col,float3 p,int id) {
 		 
 		break;
 	case 1:
-		p = fmod(p,10);
-		p -= 5;
-		v = length(p.x*p.z);
+		float arc = atan2(p.z,p.x);
+		v = cos(5.*arc+length(p));
 		col *= float3(v,v,0);
 		
 		break;
