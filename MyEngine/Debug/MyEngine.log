@@ -1,4 +1,4 @@
-﻿  CWindow.cpp
+﻿  CFileReader.cpp
 c:\program files (x86)\microsoft directx sdk (february 2010)\include\dxgitype.h(12): warning C4005: “DXGI_STATUS_OCCLUDED”: 宏重定义
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 参见“DXGI_STATUS_OCCLUDED”的前一个定义
 c:\program files (x86)\microsoft directx sdk (february 2010)\include\dxgitype.h(13): warning C4005: “DXGI_STATUS_CLIPPED”: 宏重定义

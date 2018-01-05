@@ -21,6 +21,15 @@ public:
 	void createVertexShaderFromCompiled(const char *filename);
 	void createPixelShaderFromFile(const char *shaderCode, const char *entry);
 	void createVertexShaderFromFile(const char *shaderCode, const char *entry);
+	void createInternalVertexShader();
 	void clearAllShader();
+  	
+public:
+	const char *vsHeader;
+	const char *psHeader;
+	char *cmpBuff;
+	void initHeaders();
+	void appendVsHeaders(const char *code);
+	void appendPsHeaders(const char *code);
 };
 

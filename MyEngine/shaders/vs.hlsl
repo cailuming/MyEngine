@@ -5,28 +5,28 @@
 //
 // Copyright (c) Microsoft Corporation. All rights reserved
 //----------------------------------------------------------------------
-cbuffer gBuffer : register(b0)
-{
-	matrix mat;
-	float iTime;
-	float iTime1;
-	float2 iResolution;
-};
-struct VertexShaderInput
-{
-    float3 pos : POSITION;
-	float3 norm : NORMAL;
-	float2 tex : TEXCOORD;
+// cbuffer gBuffer : register(b0)
+// {
+// 	matrix mat;
+// 	float iTime;
+// 	float iTime1;
+// 	float2 iResolution;
+// };
+// struct VertexShaderInput
+// {
+//     float3 pos : POSITION;
+// 	float3 norm : NORMAL;
+// 	float2 tex : TEXCOORD;
 
-};
+// };
 
-struct VertexShaderOut
-{
-	float4 pos : SV_POSITION;
-	float3 norm : NORMAL;
-	float2 tex : TEXCOORD;
+// struct VertexShaderOut
+// {
+// 	float4 pos : SV_POSITION;
+// 	float3 norm : NORMAL;
+// 	float2 tex : TEXCOORD;
 
-};
+// };
 
 VertexShaderOut main(VertexShaderInput input)
 { 

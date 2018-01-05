@@ -28,12 +28,15 @@ struct gBuffer {
 
 
 void onResetShader() {
-
-	shader->createVertexShaderFromFile(reader->readFile("shaders/vs.hlsl"), "main");
-	shader->createPixelShaderFromFile(reader->readFile("shaders/ps.hlsl"), "main");
+	reader->readConfigFile("config.ini");
+	shader->createInternalVertexShader();
+	shader->createPixelShaderFromFile(reader->readShaderFile(0), "main");
 }
 
-
+void onShowHelp() {
+	system("start https://msdn.microsoft.com/en-us/library/windows/desktop/bb509615(v=vs.85).aspx");
+}
+ 
 void onInit(HWND hwnd, int width, int height, bool full) {
 	render = CD3DRender::create();
 	render->createDevice();
@@ -90,11 +93,19 @@ void callBack(UINT msgID, WPARAM wp, LPARAM lp)
 	int menuID = 0;
 	switch (msgID)
 	{
-
 	case WM_COMMAND:
 		 
 		menuID = LOWORD(wp);
 		if (menuID==1001) {
+			onResetShader();
+		}
+		else if (menuID == 2001) {
+			onShowHelp();
+		}
+		break;
+	 
+	case WM_KEYUP:
+		if (wp == VK_SPACE) {
 			onResetShader();
 		}
 		break;
@@ -106,9 +117,14 @@ int _stdcall WinMain(HINSTANCE h, HINSTANCE pre, char *args, int style)
 {
 	int sw = 1280;
 	int sh = 720;
-	window = CWindow::create(h, 0, 0, sw, sh, false);
+
+	reader->readConfigFile("config.ini");
+
+	window = CWindow::create(h, 0, 0, reader->config.screenWidth, reader->config.screenHeight, false);
 	window->setMessageCallBack(callBack);
-	onInit(window->getWindowHwnd(), sw, sh,false);
+
+	
+	onInit(window->getWindowHwnd(), reader->config.screenWidth, reader->config.screenHeight,false);
 	
 	window->startPumpMessage(renderFunc);
 }

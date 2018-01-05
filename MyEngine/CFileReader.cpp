@@ -2,6 +2,7 @@
 
 CFileReader::CFileReader()
 {
+	memset(this, 0, sizeof(*this));
 }
 
 CFileReader::~CFileReader()
@@ -22,25 +23,57 @@ void CFileReader::destroy() {
 		reader = 0;
 	}
 };
-
-char *CFileReader::readFile(const char *filename) {
-	errno_t err = fopen_s(&file, filename, "r");
-	char *buff =0;
+ 
+char *CFileReader::readShaderFile(const char *filename) {
+	if (filename) {
+		errno_t err = fopen_s(&file, filename, "r");
+	}
+	else {
+		errno_t err = fopen_s(&file, config.curShaderName, "r");
+	}
+	clearBuff();
 	if (file) {
 		fseek(file, 0, 2);
 		int filelen = ftell(file);
 		fseek(file, 0, 0);
-		buff = new char[filelen];
-		memset(buff, 0, sizeof(char)*filelen);
-		filelen=fread_s(buff, filelen, 1,filelen, file);
+		tempBuff = new char[filelen];
+		memset(tempBuff, 0, sizeof(char)*filelen);
+		filelen = fread_s(tempBuff, filelen, 1, filelen, file);
+		fflush(file);
+		fclose(file);
+	}
+	else {
+		 
+		MessageBox(0, "Failed to open the file!", 0, 0);
+	}
+
+	return tempBuff;
+};
+ 
+
+void CFileReader::readConfigFile(const char *filename) {
+	errno_t err = fopen_s(&file, filename, "r");
+	 
+	if (file) {
+		 
+		fscanf_s(file, "screen_width: %d\n", &config.screenWidth);
+		fscanf_s(file, "screen_height: %d\n", &config.screenHeight);
+		fscanf_s(file, "current_ps_shader_file_name: %s \n", config.curShaderName,256);
+
 		fflush(file);
 		fclose(file);
 	}
 	else {
 		::OutputDebugString((char*)err);
+		MessageBox(0, "Failed to open the file!", 0, 0);
 	}
+};
 
-	return buff;
 
+void CFileReader::clearBuff() {
+	if (tempBuff) {
+		delete tempBuff;
+		tempBuff = 0;
+	}
 };
 

@@ -67,7 +67,7 @@ void CWindow::initWindow(HINSTANCE h, int posX, int posY, int width, int height,
         tempFlag = WS_SYSMENU | WS_MINIMIZEBOX;
     }
 
-    hwnd = CreateWindowExA(0, AppWindowClass, "BlankTitle", tempFlag, posX, posY, tempWidth, tempHeight, 0, 0, h, 0);
+    hwnd = CreateWindowExA(0, AppWindowClass, "ShaderNative", tempFlag, posX, posY, tempWidth, tempHeight, 0, 0, h, 0);
 
     if (!hwnd)
     {
@@ -119,8 +119,7 @@ void CWindow::setMessageCallBack(void(*callBack)(UINT msgID, WPARAM wp, LPARAM l
 	this->callBack = callBack;
 }
 
-
-
 HWND CWindow::getWindowHwnd() {
+
 	return hwnd;
 };

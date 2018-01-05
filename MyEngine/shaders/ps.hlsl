@@ -1,11 +1,20 @@
  
-cbuffer gBuffer : register(b0)
-{
-	matrix mat;
-	float iTime;
-	float iTime1;
-	float2 iResolution;
-};
+// cbuffer gBuffer : register(b0)
+// {
+// 	matrix mat;
+// 	float iTime;
+// 	float iTime1;
+// 	float2 iResolution;
+// };
+
+
+// struct PixelShaderInput
+// {
+// 	float4 pos : SV_POSITION;
+// 	float3 norm : NORMAL;
+// 	float2 tex : TEXCOORD;
+// };
+
 
 #define PI 3.1415926
 #define FAR 64
@@ -15,19 +24,13 @@ struct Ray {
 	float3 d;
 };
 
-struct PixelShaderInput
-{
-	float4 pos : SV_POSITION;
-	float3 norm : NORMAL;
-	float2 tex : TEXCOORD;
-};
-
-float2 obj(float3 p,float c) {
+float2 obj(float3 p,float3 c) {
 	p -= c;
+	
 	return float2(length(p)-1,0);
 }
 
-float2 plane(float3 p, float c) {
+float2 plane(float3 p, float3 c) {
 	p -= c;
 	return float2(p.y+1+0.2*sin(0.5*p.z*p.x), 1);
 }
@@ -57,6 +60,20 @@ float2 rayHit(Ray r) {
 	return float2(t,h.y);
 }
 
+float shadow(float3 lp,float3 ld,float mint,float maxt,float k){
+    float h=0;
+	float t=0;
+	float res=1;
+	for(int i=0;i<64;i++){
+        h=map(lp+t*ld).x;
+		t+=h;
+        res=min(res,k*h/t);
+		if(h<0.0001||t<mint||t>maxt){
+			return 0;
+		}
+	}
+    return res;
+}
 float3 norm(float3 p,float t) {
 	float m = map(p).x;
 	float2 dir = float2(0,1)*t*0.01;
@@ -67,6 +84,8 @@ void doLight(inout float3 col,float3 p,float3 lp,float t) {
 	float3 n = norm(p,t);
 	float3 ld = normalize(lp-p);
 	float nl = clamp(dot(n,ld),0,1);
+	float sl=  shadow(lp,ld,0.0001,length(lp-p)*0.95,128);
+	nl*=sl;
 	col = float3(nl,nl,nl);
 }
 
