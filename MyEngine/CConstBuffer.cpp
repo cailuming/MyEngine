@@ -7,6 +7,7 @@ CConstBuffer::CConstBuffer()
 
 CConstBuffer::~CConstBuffer()
 {
+	SAFERELEASE(buffer);
 }
 
 void CConstBuffer::createBuffer(void *data, UINT32 size)

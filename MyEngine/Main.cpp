@@ -1,58 +1,30 @@
 #include "Main.h"
 
 CWindow *window = 0;
-CTimer *timer = 0;
-CD3DRender *render = 0;
-CShaders *shader = new CShaders();
-CFileReader *reader = CFileReader::create();
-CVertexBuffer vBuffer;
-CIndexBuffer iBuffer;
-CConstBuffer cBuffer;
-CCamera *camera=CCamera::create();
+CTimer *timer =         CTimer::create();
+CD3DRender *render =    CD3DRender::create(); 
+ShaderCanvas *canvas =  ShaderCanvas::create();
+CCamera *camera=        CCamera::create();
+CFileReader *reader =   CFileReader::create();
 
-
-struct vertex {
-	float px, py, pz;
-	float nx, ny, nz;
-	float ux, uy;
-};
-
-// constant buffer must be 16 bytes aligned
-struct gBuffer {
-	D3DXMATRIX mat;
-	float iTime;
-	float iTime1;
-	float width;
-	float height;
-} gbuffer;
-
-
-void onResetShader() {
-	reader->readConfigFile("config.ini");
-	shader->createInternalVertexShader();
-	shader->createPixelShaderFromFile(reader->readShaderFile(0), "main");
-}
-
+ 
 void onShowHelp() {
 	system("start https://msdn.microsoft.com/en-us/library/windows/desktop/bb509615(v=vs.85).aspx");
 }
+
+void onResetShader() {
+	reader->readConfigFile("config.ini");
+	canvas->onCompileShader(reader->readShaderFile(0));
+}
  
 void onInit(HWND hwnd, int width, int height, bool full) {
-	render = CD3DRender::create();
+	 
 	render->createDevice();
 	render->createViewport(hwnd, width, height, full);
-
-	timer = CTimer::create();
-
 	camera->initCamera(width, height);
+	canvas->initCanvas();
+	canvas->onCompileShader(reader->readShaderFile(0));
 
-	float size = 1;
-	vertex v[] = { { -size, -size, 0, 0, 0, 1, 0, 0}, { -size,size, 0, 0, 0, 1, 0, 1 }, { size, size, 0, 0, 0, 1, 1, 1 }, { size, -size, 0, 0, 1, 1, 1, 0 } };
-	WORD indexs[] = {0,1,2,0,2,3};
-	vBuffer.createBuffer(sizeof(v), D3D11_USAGE_DEFAULT, v);
-	iBuffer.createBuffer(6*sizeof(WORD), D3D11_USAGE_DEFAULT, indexs);
-	cBuffer.createBuffer(&gbuffer, sizeof(gbuffer));
-	onResetShader();
 }
 
 void renderFunc(int delta) {
@@ -60,30 +32,12 @@ void renderFunc(int delta) {
  
 	 pGContext->ClearRenderTargetView(render->viewPort.renderTargetView, render->viewPort.bgcolor);
 	
-	 gbuffer.iTime = timer->getTickCount()*1.0f;
-	 gbuffer.mat = camera->matOrFinal;
-	 gbuffer.width = render->screenWidth;
-	 gbuffer.height = render->screenHeight;
-	
-	 cBuffer.updateBuffer(&gbuffer, sizeof(gbuffer));
-	 UINT stride = sizeof(vertex);
-	 UINT offset = 0;
-	 pGContext->IASetInputLayout(shader->pLayer);
-	 pGContext->IASetVertexBuffers(0,1,&vBuffer.buffer,&stride, &offset);
-	 pGContext->IASetIndexBuffer(iBuffer.getResource(), DXGI_FORMAT_R16_UINT, 0);
-
-	 pGContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	 pGContext->VSSetShader(shader->pVertexShader, 0, 0);
-	 pGContext->PSSetShader(shader->pPixelShader, 0, 0);
-	 pGContext->VSSetConstantBuffers(0, 1, &cBuffer.buffer);
-	 pGContext->PSSetConstantBuffers(0, 1, &cBuffer.buffer);
-	 pGContext->DrawIndexed(6, 0, 0);
 	//pGContext->DrawIndexedInstanced(3, 0, 0,0,0);
 	// pGContext->Draw(6,0);
 	//pGContext->DrawInstanced(3, 0,0,0);
 	// cBuffer.updateBuffer(&camera->matOrFinal, sizeof(D3DXMATRIX));
-
+	 canvas->updateGBuffer(camera->matOrFinal, timer->getTickCount()*1.0f,reader->config.screenWidth,reader->config.screenHeight);
+	 canvas->render();
 	 render->viewPort.d3dSwapChain->Present(0, 0);
 	 camera->updateCam();
 }
@@ -110,7 +64,6 @@ void callBack(UINT msgID, WPARAM wp, LPARAM lp)
 		}
 		break;
 	}
-
 };
 
 int _stdcall WinMain(HINSTANCE h, HINSTANCE pre, char *args, int style)
@@ -123,7 +76,6 @@ int _stdcall WinMain(HINSTANCE h, HINSTANCE pre, char *args, int style)
 	window = CWindow::create(h, 0, 0, reader->config.screenWidth, reader->config.screenHeight, false);
 	window->setMessageCallBack(callBack);
 
-	
 	onInit(window->getWindowHwnd(), reader->config.screenWidth, reader->config.screenHeight,false);
 	
 	window->startPumpMessage(renderFunc);

@@ -4,9 +4,7 @@
 #include "CWindow.h"
 #include "CD3DRender.h"
 #include "CShaders.h"
-#include "CFileReader.h"
-#include "CVertexBuffer.h"
-#include "CIndexBuffer.h"
-#include "CConstBuffer.h"
 #include "CCamera.h"
+#include "CRenderState.h"
+#include "ShaderCanvas.h"
 #endif

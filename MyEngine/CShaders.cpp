@@ -50,6 +50,9 @@ void CShaders::createPixelShaderFromFile(const char *shaderCode,const char *entr
 	D3DCompile(cmpBuff,strlen(cmpBuff),"pixel_shader",0,0,entry,"ps_5_0", 0,0, &pPShaderData,&pError);
 	if (pError) {
 		::OutputDebugString((char*)pError->GetBufferPointer());
+		::OutputDebugString((char*)shaderCode);
+		::OutputDebugString((char*)cmpBuff);
+
 		MessageBox(0,((char*)pError->GetBufferPointer()),"ÌבÊ¾",0);
 		return;
 	}
@@ -152,6 +155,7 @@ void CShaders::appendVsHeaders(const char *code) {
 void CShaders::appendPsHeaders(const char *code) {
 	int codelen = strlen(code) + strlen(psHeader);
 	cmpBuff = new char[codelen + 1];
+	memset(cmpBuff, 0, sizeof(char)*(codelen + 1));
 	char *p = cmpBuff;
 
 	memcpy(p, psHeader, strlen(psHeader));

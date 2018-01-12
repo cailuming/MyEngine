@@ -1,4 +1,4 @@
-﻿  CFileReader.cpp
+﻿  CFontData.cpp
 c:\program files (x86)\microsoft directx sdk (february 2010)\include\dxgitype.h(12): warning C4005: “DXGI_STATUS_OCCLUDED”: 宏重定义
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 参见“DXGI_STATUS_OCCLUDED”的前一个定义
 c:\program files (x86)\microsoft directx sdk (february 2010)\include\dxgitype.h(13): warning C4005: “DXGI_STATUS_CLIPPED”: 宏重定义
@@ -93,5 +93,7 @@ c:\program files (x86)\microsoft directx sdk (february 2010)\include\xnamathconv
 c:\program files (x86)\microsoft directx sdk (february 2010)\include\xnamathvector.inl(1269): warning C4838: 从“unsigned int”转换到“INT”需要收缩转换
 c:\program files (x86)\microsoft directx sdk (february 2010)\include\xnamathmisc.inl(518): warning C4838: 从“unsigned int”转换到“INT”需要收缩转换
 c:\program files (x86)\microsoft directx sdk (february 2010)\include\xnamathmisc.inl(519): warning C4838: 从“unsigned int”转换到“INT”需要收缩转换
+    正在创建库 C:\Users\CLM\Documents\GitHub\MyEngine\Debug\MyEngine.lib 和对象 C:\Users\CLM\Documents\GitHub\MyEngine\Debug\MyEngine.exp
+MSVCRTD.lib(initializers.obj) : warning LNK4098: 默认库“msvcrt.lib”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
   MyEngine.vcxproj -> C:\Users\CLM\Documents\GitHub\MyEngine\Debug\MyEngine.exe
   MyEngine.vcxproj -> C:\Users\CLM\Documents\GitHub\MyEngine\Debug\MyEngine.pdb (Partial PDB)

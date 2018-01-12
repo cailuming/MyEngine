@@ -32,7 +32,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\CLM\Documents\GitHub\MyEngine\freeType\include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\CLM\Documents\GitHub\MyEngine\freeType\lib;C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Include;$(IncludePath)</IncludePath>
@@ -121,10 +121,12 @@
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CConstBuffer.h" />
     <ClInclude Include="CFileReader.h" />
+    <ClInclude Include="CFontData.h" />
     <ClInclude Include="CIndexBuffer.h" />
     <ClInclude Include="CMatrix.h" />
     <ClInclude Include="CPlane.h" />
     <ClInclude Include="CQuad.h" />
+    <ClInclude Include="CRenderState.h" />
     <ClInclude Include="CShaders.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="CVec3D.h" />
@@ -135,19 +137,23 @@
     <ClInclude Include="CD3DRender.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="ShaderCanvas.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CConstBuffer.cpp" />
     <ClCompile Include="CD3DRender.cpp" />
     <ClCompile Include="CFileReader.cpp" />
+    <ClCompile Include="CFontData.cpp" />
     <ClCompile Include="CIndexBuffer.cpp" />
     <ClCompile Include="CQuad.cpp" />
+    <ClCompile Include="CRenderState.cpp" />
     <ClCompile Include="CShaders.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="CVertexBuffer.cpp" />
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ShaderCanvas.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MainMenu.rc" />

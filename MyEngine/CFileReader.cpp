@@ -26,19 +26,20 @@ void CFileReader::destroy() {
  
 char *CFileReader::readShaderFile(const char *filename) {
 	if (filename) {
-		errno_t err = fopen_s(&file, filename, "r");
+		errno_t err = fopen_s(&file, filename, "rb");
 	}
 	else {
-		errno_t err = fopen_s(&file, config.curShaderName, "r");
+		errno_t err = fopen_s(&file, config.curShaderName, "rb");
 	}
 	clearBuff();
 	if (file) {
 		fseek(file, 0, 2);
 		int filelen = ftell(file);
 		fseek(file, 0, 0);
-		tempBuff = new char[filelen];
-		memset(tempBuff, 0, sizeof(char)*filelen);
+		tempBuff = new char[filelen+1];
+		memset(tempBuff, 0, sizeof(char)*(filelen+1));
 		filelen = fread_s(tempBuff, filelen, 1, filelen, file);
+		::OutputDebugString(tempBuff);
 		fflush(file);
 		fclose(file);
 	}
