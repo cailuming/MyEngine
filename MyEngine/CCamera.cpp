@@ -68,7 +68,6 @@ void CCamera::updateCam() {
  
 };
 
-
 void CCamera::initCamera(int width, int height) {
 	pos = D3DXVECTOR3(0,0,0);
 	look = D3DXVECTOR3(0, 0, 1);

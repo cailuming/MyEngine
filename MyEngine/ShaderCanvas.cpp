@@ -29,7 +29,7 @@ void ShaderCanvas::destroy() {
 
 void ShaderCanvas::initCanvas() {
 	float size = 1;
-	vertex v[] = { { -size, -size, 0, 0, 0, 1, 0, 0 },{ -size,size, 0, 0, 0, 1, 0, 1 },{ size, size, 0, 0, 0, 1, 1, 1 },{ size, -size, 0, 0, 1, 1, 1, 0 } };
+	vertex v[] = { { -size, -size, 0.9, 0, 0, 1, 0, 0 },{ -size,size, 0.9, 0, 0, 1, 0, 1 },{ size, size, 0.9, 0, 0, 1, 1, 1 },{ size, -size, 0.9, 0, 1, 1, 1, 0 } };
 	WORD indexs[] = { 0,1,2,0,2,3 };
 	vBuffer.createBuffer(sizeof(v), D3D11_USAGE_DEFAULT, v);
 	iBuffer.createBuffer(6 * sizeof(WORD), D3D11_USAGE_DEFAULT, indexs);

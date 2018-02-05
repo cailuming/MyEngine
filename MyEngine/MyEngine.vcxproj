@@ -125,9 +125,9 @@
     <ClInclude Include="CIndexBuffer.h" />
     <ClInclude Include="CMatrix.h" />
     <ClInclude Include="CPlane.h" />
-    <ClInclude Include="CQuad.h" />
     <ClInclude Include="CRenderState.h" />
     <ClInclude Include="CShaders.h" />
+    <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="CVec3D.h" />
     <ClInclude Include="CVec4D.h" />
@@ -146,9 +146,9 @@
     <ClCompile Include="CFileReader.cpp" />
     <ClCompile Include="CFontData.cpp" />
     <ClCompile Include="CIndexBuffer.cpp" />
-    <ClCompile Include="CQuad.cpp" />
     <ClCompile Include="CRenderState.cpp" />
     <ClCompile Include="CShaders.cpp" />
+    <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="CVertexBuffer.cpp" />
     <ClCompile Include="CWindow.cpp" />

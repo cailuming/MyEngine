@@ -54,9 +54,6 @@
     <ClInclude Include="CFileReader.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="CQuad.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="CVec3D.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -73,6 +70,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CFontData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CTexture.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -104,9 +104,6 @@
     <ClCompile Include="CFileReader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="CQuad.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="CCamera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -117,6 +114,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CFontData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

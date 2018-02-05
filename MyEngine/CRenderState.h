@@ -12,11 +12,12 @@ public:
 public:
 	void setScissorRect(RECT rect);
 	void setRenderState(D3D11_FILL_MODE mode);
+	void initAllStates();
 private:
 	void createSamplerState();
 	void createRasterizerState();
-	 
 	void createBlendState();
+
 private:
 	ID3D11SamplerState *smState;
 	ID3D11BlendState *bldState;

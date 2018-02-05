@@ -45,6 +45,8 @@ void CD3DRender::createDevice()
 //创建视口模块
 void CD3DRender::createViewport(HWND hwnd, int width, int height, bool full)
 {
+	UINT level;
+	 
 	DXGI_SWAP_CHAIN_DESC desc;
 	memset(&desc, 0, sizeof(desc));
 	desc.BufferCount = 1;
@@ -58,6 +60,7 @@ void CD3DRender::createViewport(HWND hwnd, int width, int height, bool full)
 	desc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	desc.SampleDesc.Count = 1;
 	desc.SampleDesc.Quality = 0;
+	
 
 	desc.OutputWindow = hwnd;
 	desc.Windowed = !full;
@@ -68,7 +71,7 @@ void CD3DRender::createViewport(HWND hwnd, int width, int height, bool full)
 
 	HR(pGDevice->QueryInterface(__uuidof(IDXGIDevice1), (void **)&iDevice), "Failed to query the IDXGIDevice1!");
 	HR(iDevice->GetParent(__uuidof(IDXGIAdapter1), (void **)&iAdapter), "Failded to get the IDXGIAdapter!");
-	HR(iAdapter->GetParent(__uuidof(IDXGIFactory1), (void **)&iFactory), "Failed to get the IDXGIFactory!");
+	HR(iAdapter->GetParent(__uuidof(IDXGIFactory1), (void **)&iFactory),"Failed to get the IDXGIFactory!");
 
 	HRESULT hr = iFactory->CreateSwapChain(pGDevice, &desc, &viewPort.d3dSwapChain);
 
@@ -121,7 +124,7 @@ void CD3DRender::createDepthStenciBuffer(CViewPort &viewPort)
 	tdesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	tdesc.CPUAccessFlags = 0;
 	tdesc.MiscFlags = 0;
-
+	
 	HR(pGDevice->CreateTexture2D(&tdesc, 0, &depthStencil), "Failed to create the depth stencil buffer!");
 
 	D3D11_DEPTH_STENCIL_VIEW_DESC sdesc;
@@ -150,7 +153,7 @@ void CD3DRender::resizeWindow(HWND hwnd, int newSizeW, int newSizeH, bool isFull
 		//viewPort
 		DXGI_SWAP_CHAIN_DESC desc;
 		viewPort.d3dSwapChain->GetDesc(&desc);
-		//viewPort.d3dSwapChain->ResizeBuffers();
+		 
 	}
 };
 

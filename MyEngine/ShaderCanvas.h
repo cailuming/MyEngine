@@ -5,20 +5,6 @@
 #include "CConstBuffer.h"
 #include "CShaders.h"
 #include "CFileReader.h"
-struct vertex {
-	float px, py, pz;
-	float nx, ny, nz;
-	float ux, uy;
-};
-
-// constant buffer must be 16 bytes aligned
-struct GBuffer {
-	D3DXMATRIX mat;
-	float iTime;
-	float iTime1;
-	float width;
-	float height;
-} ;
 
 class ShaderCanvas
 {

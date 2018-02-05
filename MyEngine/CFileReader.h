@@ -18,12 +18,15 @@ public:
 	static void destroy();
 public:
 	char *readShaderFile(const char *filename);
-	char *readInternalShaderFile(const char *filename);
+	unsigned short *readDataFile(const char *filename);
+	int convertToUnicode(const unsigned char *src, unsigned short &des);
 	void readConfigFile(const char *filename);
 	void clearBuff();
+ 
 private:
 	FILE *file;
 	char *tempBuff;
+	unsigned short *unistr;
 public:
 	Config config;
 };

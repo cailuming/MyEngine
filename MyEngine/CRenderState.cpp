@@ -4,6 +4,7 @@ CRenderState *CRenderState::state = 0;
 
 CRenderState::CRenderState()
 {
+	
 }
 
 CRenderState::~CRenderState()
@@ -112,10 +113,19 @@ void CRenderState::createBlendState() {
 	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
-	blendDesc.RenderTarget[0].RenderTargetWriteMask = true;
+	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ZERO;
 
 	HR(pGDevice->CreateBlendState(&blendDesc, &bldState),"Failed to create BlendState!");
 
 };
+
+void CRenderState::initAllStates() {
+	createRasterizerState();
+	createSamplerState();
+	createBlendState();
+
+	pGContext->OMSetBlendState(bldState,0,0xffffffff);
+
+}

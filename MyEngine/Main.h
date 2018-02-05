@@ -7,4 +7,5 @@
 #include "CCamera.h"
 #include "CRenderState.h"
 #include "ShaderCanvas.h"
+#include "CFontData.h"
 #endif
