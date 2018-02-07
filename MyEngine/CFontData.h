@@ -18,7 +18,12 @@ struct Glyph {
 	int advance;
 	int bit_top;
 	int bit_left;
+	int pitch;
 	unsigned char *buff;
+	~Glyph() {
+		delete buff;
+		buff = 0;
+	}
 };
 
 class CFontData
@@ -61,6 +66,5 @@ public:
 	void onCompileShader(const char *shadercode);
 	void updateGBuffer(D3DXMATRIX mat, float iTime, float width, float height);
 	void render();
-	 
 };
 

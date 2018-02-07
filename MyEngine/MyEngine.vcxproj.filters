@@ -75,6 +75,9 @@
     <ClInclude Include="CTexture.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CSpriteFont.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CD3DRender.cpp">
@@ -117,6 +120,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CTexture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpriteFont.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,15 +11,10 @@ float4 main(PixelShaderInput input) : SV_TARGET
 {
 	 
 	float2 uv =input.tex;
-	
-	float3 col=mTex.Sample(TextureSampler,float2(uv.x,1-uv.y)).z;
- 	// float3 col=mTex.Sample(TextureSampler,float2(uv.x,1-uv.y)).z;
-	// float3 col=mTex.Sample(TextureSampler,float2(uv.x,1-uv.y)).z;
-	// float3 col=mTex.Sample(TextureSampler,float2(uv.x,1-uv.y)).z;
-	
-	col*=4; 
+	  
+	float4 col=0;
 	 
-	float alp=col.z; 
-	
-	return float4(float3(1,1,1),col.z);
+    col= mTex.Sample(TextureSampler,float2(uv.x,1-uv.y)).w;
+    col.xyz=1; 
+	return float4(col.xyz,col.w);
 }

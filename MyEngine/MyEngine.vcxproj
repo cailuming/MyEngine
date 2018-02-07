@@ -127,6 +127,7 @@
     <ClInclude Include="CPlane.h" />
     <ClInclude Include="CRenderState.h" />
     <ClInclude Include="CShaders.h" />
+    <ClInclude Include="CSpriteFont.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="CVec3D.h" />
@@ -148,6 +149,7 @@
     <ClCompile Include="CIndexBuffer.cpp" />
     <ClCompile Include="CRenderState.cpp" />
     <ClCompile Include="CShaders.cpp" />
+    <ClCompile Include="CSpriteFont.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="CVertexBuffer.cpp" />

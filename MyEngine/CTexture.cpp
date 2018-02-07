@@ -19,7 +19,7 @@ void CTexture::createShaderTexture2D(int width, int height, unsigned char *data)
 	tdesc.ArraySize = 1;
 	tdesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 	tdesc.CPUAccessFlags = 0;
-	tdesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	tdesc.Format = DXGI_FORMAT_A8_UNORM;
 	tdesc.Width = width;
 	tdesc.Height = height;
 	tdesc.MipLevels = 1;
@@ -28,15 +28,16 @@ void CTexture::createShaderTexture2D(int width, int height, unsigned char *data)
 	tdesc.SampleDesc.Quality = 0;
 	tdesc.Usage = D3D11_USAGE_DEFAULT;
 	
+	
 	float *sd = new  float[width*height];
 	for (int i = 0; i < height;i++) {
 		for (int j = 0; j < width;j++) {
-			sd[i*width + j] = data[i*width + j]*1.0f/255;
+			sd[i*width + j] = data[i*width + j];
 		}
 	}
-	sdata.pSysMem = sd;
-	sdata.SysMemPitch = width*4;
-	sdata.SysMemSlicePitch = 0;
+	sdata.pSysMem = data;
+	sdata.SysMemPitch = width;
+	sdata.SysMemSlicePitch = width*height;
 
 	HR(pGDevice->CreateTexture2D(&tdesc, &sdata,&pTex2D),"Failed to create texture2D!");
 	 

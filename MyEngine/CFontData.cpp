@@ -44,7 +44,7 @@ void CFontData::initFontFromFile(const char *fontname) {
 	{
 		::OutputDebugStringA("Unknown error!");
 	}
-	setFontInfo(1280,720,20);
+	setFontInfo(1280,720,50);
 	InitBuffer();
 };
 
@@ -56,14 +56,13 @@ void CFontData::setFontInfo(int width, int height, int size) {
 	charNumPerRow = textureWidth/size;
 	charNumPerCol = textureHeight / size;
 	fontSize      = size;
-	FT_Set_Pixel_Sizes(face, 0, size);
-	 
+    FT_Set_Pixel_Sizes(face, 0, size);
 };
 
 // draw one character
 void CFontData::drawFontToBuffer(int x, int y, unsigned char *&buff, Glyph &data) {
 	for (int i = 0; i < data.height;i++) {
-		memcpy(&buff[x +data.bit_left+(i+y+fontSize-data.bit_top)*textureWidth], &data.buff[i*data.width], data.width);
+	   memcpy(&buff[x +data.bit_left+(i+y+fontSize-data.bit_top)*textureWidth], &data.buff[i*data.pitch], data.width);
 	}
 };
 
@@ -87,6 +86,7 @@ void CFontData::genFontTexture(const unsigned short *str) {
 		data[i].height = slot->bitmap.rows;
 		data[i].bit_left = slot->bitmap_left;
 		data[i].bit_top = slot->bitmap_top;
+		data[i].pitch = slot->bitmap.pitch;
 		// why slot should shift left 6 bits,cause of 1 point equals 64 pixels 
 		data[i].advance = slot->advance.x>>6;
 		data[i].buff = new unsigned char[slot->bitmap.pitch*slot->bitmap.rows];
@@ -109,23 +109,27 @@ void CFontData::genFontTexture(const unsigned short *str) {
 			offY += fontSize;
 		}
 	}
-	
+	/*char cbuff[64] = {};
 	for (int i = 0; i < fontSize;i++) {
 		for (int j = 0; j < textureWidth;j++) {
-			if (buff[i*textureWidth +j]) {
-				::OutputDebugString("бя");
+			if(buff[i*textureWidth + j]){
+				sprintf_s(cbuff, "%0.2f ", buff[i*textureWidth + j]*1.0/255);
+				::OutputDebugString(cbuff);
 			}
 			else {
-				::OutputDebugString("  ");
+				::OutputDebugString("    ");
 			}
+			
 		}
 		::OutputDebugString("\n");
-	}
+	}*/
 
 	fontTexture = new CTexture();
 	fontTexture->createShaderTexture2D(textureWidth, textureHeight, buff);
 
 	FT_Done_Face(face);
+
+	delete[] data;
 }
 
 void CFontData::InitBuffer() {
