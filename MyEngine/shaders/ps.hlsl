@@ -28,7 +28,7 @@ void Julia(inout float3 col,float2 uv){
    
       col=float3(cos(z.y),sin(z.x),uv.x);
    }else{
-	  col=float3(1,1,length(uv-z+arc));
+	  col=float3(0.2,0.3,length(uv-z+arc));
    }
 }
 

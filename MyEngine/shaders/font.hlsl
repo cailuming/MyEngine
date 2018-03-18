@@ -13,8 +13,12 @@ float4 main(PixelShaderInput input) : SV_TARGET
 	float2 uv =input.tex;
 	  
 	float4 col=0;
-	 
+	
+    float atlasX = 0.0012;
+    float atlasY = 0.1;	
     col= mTex.Sample(TextureSampler,float2(uv.x,1-uv.y)).w;
-    col.xyz=1; 
+	 
+	col.xyz=1;
+	 
 	return float4(col.xyz,col.w);
 }

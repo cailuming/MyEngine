@@ -25,7 +25,7 @@ void onInit(HWND hwnd, int width, int height, bool full) {
 	camera->initCamera(width, height);
 	canvas->initCanvas();
 	canvas->onCompileShader(reader->readShaderFile(0));
-	font->initFontFromFile("Fonts/simkai.ttf");
+	font->initFontFromFile("Fonts/msyh.ttf");
 	font->genFontTexture(reader->readDataFile("Fonts/font.txt"));
 	font->onCompileShader(reader->readShaderFile("shaders/font.hlsl"));
 	rState->initAllStates();
@@ -41,8 +41,8 @@ void renderFunc(int delta) {
 	// pGContext->Draw(6,0);
 	//pGContext->DrawInstanced(3, 0,0,0);
 	// cBuffer.updateBuffer(&camera->matOrFinal, sizeof(D3DXMATRIX));
-	 canvas->updateGBuffer(camera->matOrFinal, timer->getTickCount()*1.0f,reader->config.screenWidth,reader->config.screenHeight);
-	 font->updateGBuffer(camera->matOrFinal, timer->getTickCount()*1.0f, reader->config.screenWidth, reader->config.screenHeight);
+	 canvas->updateGBuffer(camera->matOrFinal, timer->getTickCount()*0.001f,reader->config.screenWidth,reader->config.screenHeight);
+	 font->updateGBuffer(camera->matOrFinal, timer->getTickCount()*0.001f, reader->config.screenWidth, reader->config.screenHeight);
 	
 	 canvas->render();
 	 font->render();
@@ -82,7 +82,7 @@ int _stdcall WinMain(HINSTANCE h, HINSTANCE pre, char *args, int style)
 
 	reader->readConfigFile("config.ini");
 
-	window = CWindow::create(h, 0, 0, reader->config.screenWidth, reader->config.screenHeight, false);
+	window = CWindow::create(h, 100, 100, reader->config.screenWidth, reader->config.screenHeight, false);
 	window->setMessageCallBack(callBack);
 
 	onInit(window->getWindowHwnd(), reader->config.screenWidth, reader->config.screenHeight,false);

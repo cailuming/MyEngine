@@ -19,6 +19,7 @@ struct Glyph {
 	int bit_top;
 	int bit_left;
 	int pitch;
+ 
 	unsigned char *buff;
 	~Glyph() {
 		delete buff;

@@ -69,17 +69,17 @@ void CFontData::drawFontToBuffer(int x, int y, unsigned char *&buff, Glyph &data
 void CFontData::genFontTexture(const unsigned short *str) {
 	 
 	int textLen = lstrlenW((wchar_t*)str);
-	 
+	FT_Vector kerning;
 	data = new Glyph[textLen];
 	 
 	//copy and record the buff data
  	for (int i = 0; i <textLen;i++) {
 		int glyph_index = FT_Get_Char_Index(face,str[i]);
-		
+	 
 		error = FT_Load_Glyph(face, glyph_index, FT_LOAD_DEFAULT);
-		
+
 		error = FT_Render_Glyph(face->glyph, FT_RENDER_MODE_NORMAL);
-		
+		 
 		slot = face->glyph;
 	 
 		data[i].width = slot->bitmap.width;
@@ -87,12 +87,14 @@ void CFontData::genFontTexture(const unsigned short *str) {
 		data[i].bit_left = slot->bitmap_left;
 		data[i].bit_top = slot->bitmap_top;
 		data[i].pitch = slot->bitmap.pitch;
+	
 		// why slot should shift left 6 bits,cause of 1 point equals 64 pixels 
-		data[i].advance = slot->advance.x>>6;
+		//-(slot->metrics.horiBearingX>>6)
+		data[i].advance = (slot->advance.x>>6);
 		data[i].buff = new unsigned char[slot->bitmap.pitch*slot->bitmap.rows];
 		memcpy(data[i].buff, slot->bitmap.buffer, slot->bitmap.pitch*slot->bitmap.rows);
 	}
-	// this glapy is single used 
+	// this glyph is single used 
 	 
 	int offX = 0;
 	int offY = 0;
@@ -109,21 +111,7 @@ void CFontData::genFontTexture(const unsigned short *str) {
 			offY += fontSize;
 		}
 	}
-	/*char cbuff[64] = {};
-	for (int i = 0; i < fontSize;i++) {
-		for (int j = 0; j < textureWidth;j++) {
-			if(buff[i*textureWidth + j]){
-				sprintf_s(cbuff, "%0.2f ", buff[i*textureWidth + j]*1.0/255);
-				::OutputDebugString(cbuff);
-			}
-			else {
-				::OutputDebugString("    ");
-			}
-			
-		}
-		::OutputDebugString("\n");
-	}*/
-
+	 
 	fontTexture = new CTexture();
 	fontTexture->createShaderTexture2D(textureWidth, textureHeight, buff);
 
